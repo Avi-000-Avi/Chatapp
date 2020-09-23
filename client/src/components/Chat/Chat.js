@@ -50,21 +50,19 @@ const Chat = ({location}) => {
 
         if(message){
             socket.emit('sendMessage',message, () => setMessage(''));
-        }
-
-        console.log(message,messages);
+        }    
     }
+
+    console.log(message,messages);
 
     return (
         <div className = "outerContainer">
             <div className = "container">
                 <InfoBar room = {room}/>
-                <input value = {message} onChange = {(event) => setMessage(event.target.value)}
-                onKeyPress = {event => event.key === 'Enter' ? sendMessage(event) : null}
-                />
+                <input message = {message}  setMessage={setMessage} sendMessage ={sendMessage}/>
             </div>
         </div>
-    );
+    )
 }
 
 export default Chat;

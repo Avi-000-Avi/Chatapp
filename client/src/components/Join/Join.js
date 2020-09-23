@@ -15,10 +15,10 @@ const Join = () => {
                 Since this is a name input we are going to set output of this to our name variable
                 */}
                 <div>
-                    <input placeholder ="Name" className="joinInput" type="text" onChange = {(event) => setName(event.target.value)}/>
+                    <input placeholder ="" className="joinInput" type="text" onChange = {(event) => setName(event.target.value)}/>
                 </div>
                 <div>
-                    <input placeholder ="Room" className="joinInput mt-20" type="text" onChange = {(event) => setRoom(event.target.value)}/>
+                    <input placeholder ="" className="joinInput mt-20" type="text" onChange = {(event) => setRoom(event.target.value)}/>
                 </div>
                 <Link onClick ={event => (!name|| !room)? event.preventDefault() : null} to ={`/chat?name=${name}&room =${room} `}>
                 {/*Prevent user to click this data or this link to be transferred to chat application 

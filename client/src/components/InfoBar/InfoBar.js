@@ -5,7 +5,6 @@ import closeIcon from '../../icons/closeIcon.png';
 import onlineIcon from '../../icons/onlineIcon.png';
 
 
-
 const InfoBar = ({room}) => (
     <div className ="infoBar">
         <div className ="leftInnerContainer">
