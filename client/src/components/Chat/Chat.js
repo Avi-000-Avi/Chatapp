@@ -4,6 +4,8 @@ import io from 'socket.io-client';
 
 import './Chat.css';
 import InfoBar from '../InfoBar/InfoBar';
+import Input from '../Input/Input';
+import Messages from '../Messages/Messages';
 
 let socket;
 
@@ -11,6 +13,7 @@ const Chat = ({location}) => {
     
     const [name, setName] = useState('');
     const [room, setRoom] = useState('');
+    const [users, setUsers] = useState('');
     const [message,setMessage] = useState('');
     const [messages,setMessages] = useState([]);
     const ENDPOINT = 'localhost:5000';
@@ -29,20 +32,17 @@ const Chat = ({location}) => {
                 alert(error);
             }
         });
-
-        return () => {
-            socket.emit('disconnect');
-
-            socket.off();
-        }
-
     }, [ENDPOINT,location.search]);
 
     useEffect(() => {
         socket.on('message', (message) => {
             setMessages([...messages,message]);
-        })
-    },[messages])
+        });
+
+        socket.on('roomData',({users})  => {
+            setUsers(users);
+        });
+    },[])
 
     const sendMessage = (event) => {
         {/*When you click a button it refreshes the whole page we want to remove this default behaviour */}
@@ -59,7 +59,8 @@ const Chat = ({location}) => {
         <div className = "outerContainer">
             <div className = "container">
                 <InfoBar room = {room}/>
-                <input message = {message}  setMessage={setMessage} sendMessage ={sendMessage}/>
+                <Messages messages = {messages} name ={name}/>
+                <Input message = {message}  setMessage={setMessage} sendMessage ={sendMessage}/>
             </div>
         </div>
     )
